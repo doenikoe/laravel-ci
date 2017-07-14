@@ -37,7 +37,10 @@ before_script:
   - php artisan key:generate
   - php artisan config:clear
 script: 
+  # run unit test
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+  # run phpcs (code sniffer)
+  - ./vendor/bin/phpcs app
 
 # if test success then upload code coverage to codecov
 after_success:
