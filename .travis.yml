@@ -30,6 +30,8 @@ before_script:
   - php --version
   # show composer version
   - composer --version
+  # generate laravel app key
+  - php artisan key:generate
 script: 
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
 
