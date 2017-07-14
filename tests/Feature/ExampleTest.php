@@ -1,7 +1,5 @@
 <?php
-/**
-*   Example test case
-*/
+
 namespace Tests\Feature;
 
 use Tests\TestCase;
