@@ -1,0 +1,38 @@
+# Use ubuntu trusty
+dist: trusty
+sudo: false
+
+# build only master branch
+branches:
+  only:
+    - master
+
+# Test  Matrix
+language: php
+env:
+  - DEFAULT_COMPOSER_FLAG="--prefer-dist --no-interaction --no-progress --optimize-autoloader"
+
+cache: 
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+php: 
+  - 5.6
+  - 7.1
+install: 
+  - travis_retry composer self-update
+  # publish composer vendor binary
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  # install composer dependency
+  - travis_retry composer install ${DEFAULT_COMPOSER_FLAG}
+before_script:
+  # show php version
+  - php --version
+  # show composer version
+  - composer --version
+script: 
+  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+
+# if test success then upload code coverage to codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
