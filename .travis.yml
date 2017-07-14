@@ -33,6 +33,7 @@ before_script:
   - composer --version
   # generate virtual .env
   - echo ${LARAVEL_ENV} >> .env
+  - cat .env
   # generate laravel app key
   - php artisan key:generate
 script: 
