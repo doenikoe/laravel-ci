@@ -11,8 +11,9 @@ branches:
 language: php
 env:
   - DEFAULT_COMPOSER_FLAG="--prefer-dist --no-interaction --no-progress --optimize-autoloader"
+  - LARAVEL_ENV_="APP_NAME=Laravel APP_ENV=local"
 
-cache: 
+cache:  
   directories:
     - vendor
     - $HOME/.composer/cache
@@ -30,8 +31,11 @@ before_script:
   - php --version
   # show composer version
   - composer --version
+  # create .env
+  - cp .env.example .env
   # generate laravel app key
   - php artisan key:generate
+  - php artisan config:clear
 script: 
   - ./vendor/bin/phpunit --coverage-clover=coverage.xml
 
